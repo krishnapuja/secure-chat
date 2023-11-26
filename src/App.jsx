@@ -23,7 +23,6 @@ function App() {
     backgroundPosition: 'center center'
   };
   const onUserNameSelect = (e) => {
-    console.log(e);
     setUserName(e);
   }
 

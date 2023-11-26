@@ -118,6 +118,7 @@ def string_to_bit_array(text):
     # Convert a string into a list of bits
     bit_array = []
     for char in text:
+        #print(char)
         binary_val = binvalue(char, 8)  # Get the binary representation of the character as an 8-bit string
         bit_array.extend([int(bit) for bit in binary_val])  # Add the bits to the final bit array
     return bit_array

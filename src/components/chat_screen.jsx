@@ -8,7 +8,6 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import users, { messages } from '../global';
-import { encrypt, decrypt } from '../3DES';
 
 function ChatScreen({ login, userName, type }) {
     const [messagesList, setMessagesList] = React.useState(messages);
@@ -47,6 +46,7 @@ function ChatScreen({ login, userName, type }) {
       };
     const sendMessageClick = async(e, user) => {
         //const encm = encrypt(newKey, newMessage);
+        const startTime = performance.now();
         const encm = await encryptedData(newKey, newMessage);
         const mess = {
             message: encm,
@@ -55,7 +55,10 @@ function ChatScreen({ login, userName, type }) {
         };
         const mlist = [...sentMessages, mess];
         setSentMessages(mlist);
-        setMessagesList([...messagesList, mlist])
+        setMessagesList([...messagesList, mlist]);
+        const endTime = performance.now();
+        const elapsedTime = endTime - startTime;
+        console.log(`Encryption Time taken: ${elapsedTime} milliseconds`);
     };
     const handleClose = () => {
         setShowModal(false);
@@ -65,6 +68,7 @@ function ChatScreen({ login, userName, type }) {
         setDecryptAction(action);
     }
     const onDecryptMessages = async() => {
+        const startTime = performance.now();
         if (decryptAction === 'r') {
             const rm = await recievedMessages.map(async(message) => {
                 //const dm = decrypt(newDecryptKey, message.message)
@@ -79,11 +83,12 @@ function ChatScreen({ login, userName, type }) {
                 console.log(message.message, newDecryptKey)
                 //const dm = decrypt(newDecryptKey, message.message)
                 const dm = await decryptedData(newDecryptKey, message.message);
-                console.log(dm)
                 message.decryptedMessage = dm;
                 return message;
             }))
-            console.log(sm)
+            const endTime = performance.now();
+            const elapsedTime = endTime - startTime;
+            console.log(`Decryption Time taken: ${elapsedTime} milliseconds`);
             setSentMessages(sm);
         }
         setShowModal(false);

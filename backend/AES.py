@@ -353,9 +353,6 @@ def encrypt(key, plaintext, workload=100000):
     key, hmac_key, iv = get_key_iv(key, salt, workload)
     ciphertext = AES(key).encrypt_cbc(plaintext, iv)
     hmac = new_hmac(hmac_key, salt + ciphertext, 'sha256').digest()
-    print(hmac)
-    print(salt)
-    print(ciphertext)
     return hmac + salt + ciphertext
 
 
@@ -378,14 +375,14 @@ def decrypt(key, ciphertext, workload=100000):
 
 # if __name__ == '__main__':
 
-encryptedBytes = encrypt("secretkeysecretkeysecret", "This is AES algorithm this is AES")
-print(encryptedBytes)
-import base64
-encrypted_message = base64.b64encode(encryptedBytes).decode("utf-8")
-print(encrypted_message)
-decrypt_Bytes = base64.b64decode(encrypted_message.encode("utf-8"))
-decryptedString = decrypt(key="secretkeysecretkeysecret", ciphertext=decrypt_Bytes)
-print(decryptedString.decode("utf-8"))
+# encryptedBytes = encrypt("secretkeysecretkeysecret", "This is AES algorithm this is AES")
+# print(encryptedBytes)
+# import base64
+# encrypted_message = base64.b64encode(encryptedBytes).decode("utf-8")
+# print(encrypted_message)
+# decrypt_Bytes = base64.b64decode(encrypted_message.encode("utf-8"))
+# decryptedString = decrypt(key="secretkeysecretkeysecret", ciphertext=decrypt_Bytes)
+# print(decryptedString.decode("utf-8"))
 
 # def encrypt_message(key, text):
 #     #a = AES()
