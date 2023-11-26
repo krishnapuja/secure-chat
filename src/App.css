@@ -13,6 +13,12 @@
   }
 }
 
+.nav-container-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
